@@ -30,4 +30,14 @@
         app:layout_constraintStart_toEndOf="@id/btn_load"
         app:layout_constraintTop_toBottomOf="@id/txt" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_load_products"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PRODUCT LOAD"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_load"/>
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
