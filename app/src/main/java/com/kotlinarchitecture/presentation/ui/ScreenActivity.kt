@@ -31,8 +31,6 @@ class ScreenActivity : AppCompatActivity() {
     private lateinit var safeUseCase: SafeCityInfoUseCase
     private lateinit var loadDummyProducts: LoadDummyProductListUseCase
 
-    lateinit var lstProduct: List<ProductDto>
-
     private lateinit var vm: ScreenViewModel
 
     private fun showDlg(msg: String) {
@@ -78,11 +76,18 @@ class ScreenActivity : AppCompatActivity() {
 
         // Button RetrofitCheck
         binding.btnLoadProducts.setOnClickListener {
-            val thread = Thread {
-                lstProduct = loadDummyProducts.execute() as List<ProductDto>
+
+            // Загрузили данные асинхронно с главным потоком
+            val x = loadDummyProducts.execute() as List<ProductDto>
+
+            // вывод данных
+            val msgBuilder = StringBuilder()
+            x.forEach {
+                with(msgBuilder){
+                    append(it.title).append("\n")
+                }
             }
-            thread.start()
-            thread.join()
+            showDlg(msgBuilder.toString())
         }
     }
 

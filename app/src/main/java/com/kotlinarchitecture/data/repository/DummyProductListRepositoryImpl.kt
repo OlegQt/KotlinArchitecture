@@ -12,7 +12,6 @@ class DummyProductListRepositoryImpl(private val client:NetworkClient):DummyProd
 
         if(response.resultCode==200){
             val resp:ProductSearchResponse = response as ProductSearchResponse
-            Log.e("response","repo return")
             return resp.products
         }
         else return emptyList()
