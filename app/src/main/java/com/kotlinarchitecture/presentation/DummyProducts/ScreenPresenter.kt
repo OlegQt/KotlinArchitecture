@@ -1,11 +1,11 @@
-package com.kotlinarchitecture.presentation.movies
+package com.kotlinarchitecture.presentation.DummyProducts
 
 import android.content.Context
 import com.kotlinarchitecture.data.dto.ProductDto
 import com.kotlinarchitecture.data.network.RetrofitNetworkClient
 import com.kotlinarchitecture.data.repository.DummyProductListRepositoryImpl
-import com.kotlinarchitecture.domain.repository.DummyProductRepository
 import com.kotlinarchitecture.domain.usecase.LoadDummyProductListUseCase
+import java.lang.Thread.State
 
 class ScreenPresenter(private val view: ScreenView, val context: Context) {
     fun loadDummyProducts() {
@@ -21,7 +21,8 @@ class ScreenPresenter(private val view: ScreenView, val context: Context) {
                     if (it is ProductDto) append(it.title+"\n")
                 }
             }
-            view.showPlaceHolderMsg(strBld.toString())
+            //view.showPlaceHolderMsg(strBld.toString())
+            view.render(ScreenState.Error(strBld.toString()))
         }
     }
 

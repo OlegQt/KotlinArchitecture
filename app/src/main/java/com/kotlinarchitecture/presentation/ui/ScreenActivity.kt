@@ -2,27 +2,16 @@ package com.kotlinarchitecture.presentation.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.kotlinarchitecture.data.dto.ProductDto
-import com.kotlinarchitecture.data.dto.ProductSearchResponse
-import com.kotlinarchitecture.data.network.DummyProductApiService
-import com.kotlinarchitecture.data.network.RetrofitNetworkClient
 import com.kotlinarchitecture.data.repository.CityInfoRepositoryImpl
-import com.kotlinarchitecture.data.repository.DummyProductListRepositoryImpl
 import com.kotlinarchitecture.databinding.ActivityScreenBinding
 import com.kotlinarchitecture.domain.model.CityInfo
 import com.kotlinarchitecture.domain.usecase.LoadCityInfoUseCase
-import com.kotlinarchitecture.domain.usecase.LoadDummyProductListUseCase
 import com.kotlinarchitecture.domain.usecase.SafeCityInfoUseCase
-import com.kotlinarchitecture.presentation.movies.ScreenPresenter
-import com.kotlinarchitecture.presentation.movies.ScreenView
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.kotlinarchitecture.presentation.DummyProducts.ScreenPresenter
+import com.kotlinarchitecture.presentation.DummyProducts.ScreenState
+import com.kotlinarchitecture.presentation.DummyProducts.ScreenView
 
 class ScreenActivity : AppCompatActivity(), ScreenView {
     private lateinit var binding: ActivityScreenBinding
@@ -81,6 +70,12 @@ class ScreenActivity : AppCompatActivity(), ScreenView {
     override fun onResume() {
         super.onResume()
         //showDlg("Resume function invoke!")
+    }
+
+    override fun render(state: ScreenState) {
+        when(state){
+            is ScreenState.Error -> showDlg(state.errorMessage)
+        }
     }
 
     override fun showPlaceHolderMsg(msg: String) {
