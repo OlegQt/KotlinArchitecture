@@ -20,5 +20,4 @@ class ScreenViewModel :ViewModel(){
         super.onCleared()
     }
 
-
 }
